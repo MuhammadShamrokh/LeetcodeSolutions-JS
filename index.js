@@ -1,16 +1,21 @@
 /**
- * @param {number[]} nums
- * @param {number} target
- * @return {number[]}
+ * @param {number} x
+ * @return {boolean}
  */
-var twoSum = function(nums, target) {
-    const numsMap = new Map();
+var isPalindrome = function(x) {
+    if(x < 0)
+        return false;
 
-    for(let i=0; i<nums.length;i++){
-        if(numsMap.has(target-nums[i])){
-            return [i, numsMap.get(target-nums[i])];
-        }
-        
-        numsMap.set(nums[i],i);
-    }
+    return x == getOppoNum(x);
 };
+
+function getOppoNum(num){
+    let oppoNum = 0;
+
+    while(num != 0){
+        oppoNum = oppoNum * 10 + (num % 10);
+        num = Math.floor(num/10);
+    }
+
+    return oppoNum;
+}
