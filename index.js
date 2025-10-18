@@ -1,21 +1,33 @@
 /**
- * @param {number} x
- * @return {boolean}
+ * @param {string} s
+ * @return {number}
  */
-var isPalindrome = function(x) {
-    if(x < 0)
-        return false;
+var romanToInt = function(s) {
+   // Step 1: Map of Roman numerals
+  const romanMap = new Map([
+    ['I', 1],
+    ['V', 5],
+    ['X', 10],
+    ['L', 50],
+    ['C', 100],
+    ['D', 500],
+    ['M', 1000]
+  ]);
 
-    return x == getOppoNum(x);
-};
+  let total = 0;
 
-function getOppoNum(num){
-    let oppoNum = 0;
+  // Step 2: Loop through the string
+  for (let i = 0; i < s.length; i++) {
+    const current = romanMap.get(s[i]);
+    const next = romanMap.get(s[i + 1]);
 
-    while(num != 0){
-        oppoNum = oppoNum * 10 + (num % 10);
-        num = Math.floor(num/10);
+    // Step 3: If current < next → subtract, else add
+    if (current < next) {
+      total -= current;
+    } else {
+      total += current;
     }
+  }
 
-    return oppoNum;
-}
+  return total;
+};
