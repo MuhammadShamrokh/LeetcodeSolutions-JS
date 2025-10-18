@@ -1,33 +1,31 @@
 /**
- * @param {string} s
- * @return {number}
+ * @param {string[]} strs
+ * @return {string}
  */
-var romanToInt = function(s) {
-   // Step 1: Map of Roman numerals
-  const romanMap = new Map([
-    ['I', 1],
-    ['V', 5],
-    ['X', 10],
-    ['L', 50],
-    ['C', 100],
-    ['D', 500],
-    ['M', 1000]
-  ]);
+var longestCommonPrefix = function(strs) {
+    let currentPrefix = strs[0];
+    const length = strs.length;
 
-  let total = 0;
+    for(let i=1; i<length;i++){
+      currentPrefix = findCommonPrefix(currentPrefix, strs[i]);
 
-  // Step 2: Loop through the string
-  for (let i = 0; i < s.length; i++) {
-    const current = romanMap.get(s[i]);
-    const next = romanMap.get(s[i + 1]);
-
-    // Step 3: If current < next → subtract, else add
-    if (current < next) {
-      total -= current;
-    } else {
-      total += current;
+      if(currentPrefix.length == 0)
+         break;
     }
-  }
-
-  return total;
+    
+    return currentPrefix;
 };
+
+function findCommonPrefix(str1, str2){
+   let result = "";
+   let length = Math.min(str1.length, str2.length);
+
+   for(let i=0;i<length;i++){
+      if(str1[i] == str2[i])
+         result += str[i];
+      else
+         break;
+   }
+
+   return result;
+}
